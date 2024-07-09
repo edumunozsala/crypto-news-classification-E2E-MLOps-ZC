@@ -129,6 +129,7 @@ venv/
 ENV/
 env.bak/
 venv.bak/
+.dev.env
 
 # Spyder project settings
 .spyderproject
@@ -160,3 +161,19 @@ cython_debug/
 #  and can be added to the global gitignore or merged into this file.  For a more nuclear
 #  option (not recommended) you can uncomment the following to ignore the entire idea folder.
 #.idea/
+.mage_temp_profiles
+.preferences.yaml
+.ssh_tunnel
+.terraform
+.terraform.*
+.variables/
+__pycache__/
+docker-compose.override.yml
+logs/
+mage_data/
+mlruns/
+secrets/
+terraform.tfstate
+terraform.tfstate.backup
+titanic_clean.csv
+cryptonews.csv
