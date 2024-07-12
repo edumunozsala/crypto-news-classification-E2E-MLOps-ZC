@@ -1,0 +1,13 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+
+[dev-packages]
+pandas = "==2.0.1"
+scikit-learn = "==1.2.2"
+
+[requires]
+python_version = "3.10"

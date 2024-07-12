@@ -1,0 +1,26 @@
+version: '3.9'
+
+services:
+
+    mlflow:
+        build:
+          context: ./mlflow
+          dockerfile: Dockerfile                 # to build a root image with a system pip install of mlflow
+          #dockerfile: Dockerfile-conda          # to build a non-root image with a tailored conda env for mlflow
+        image: mlflow_tracker_slim
+        container_name: mlflow_tracker_${MLFLOW_PORT}
+        hostname: mlflow_phpmyadmin_${MLFLOW_PORT}
+        #restart: unless-stopped
+        #depends_on:
+        #    - mysql
+        env_file:                                # Swarm will load (in the container) both 'env_file' files in the list, not only '.env' by default !!
+            - .env                               # Default '--env-file' option: $ docker-compose up -d
+        #    - .secrets/env-secrets               # Requires '--env-file' option: $ docker-compose --env-file .env-secrets up -d
+        ports:
+            - ${MLFLOW_PORT}:5000
+        volumes:
+            # Artifact store locally available through folder mapping:
+            - ./mlflow:/mlflow
+        #command: ./entrypoint.sh                # replaces the CMD line in Dockerfile
+        #command: ./entrypoint-pip-dev.sh         # only for the image built with Dockerfile
+        #command: ./entrypoint-conda-dev.sh      # only for the image built with Dockerfile-conda
