@@ -1,0 +1,35 @@
+{
+    "family": "prefect-worker-task",
+    "networkMode": "awsvpc",
+    "requiresCompatibilities": [
+        "FARGATE"
+    ],
+    "cpu": "512",
+    "memory": "1024",
+    "executionRoleArn": "arn:aws:iam::223817798831:role/ecsTaskExecutionRole",
+    "taskRoleArn": "arn:aws:iam::223817798831:role/ecsTaskExecutionRole",
+    "containerDefinitions": [
+        {
+            "name": "prefect-worker",
+            "image": "prefecthq/prefect:2-latest",
+            "cpu": 512,
+            "memory": 1024,
+            "essential": true,
+            "command": [
+                "/bin/sh",
+                "-c",
+                "pip install prefect-aws && prefect worker start --pool my-ecs-pool --type ecs"
+            ],
+            "environment": [
+                {
+                    "name": "PREFECT_API_URL",
+                    "value": "https://api.prefect.cloud/api/accounts/3f0545cf-8496-4f2a-9af0-a778667d71fa/workspaces/0dc08f18-d5e0-4958-853d-086d2ce1d9df"
+                },
+                {
+                    "name": "PREFECT_API_KEY",
+                    "value": "pnu_9cIAoS4We0Ewu1SLsGxImYbzJEs0PV0jqR4u"
+                }
+            ]
+        }
+    ]
+}
